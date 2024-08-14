@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Auth from './components/Auth';
+import ProductManagement from './components/ProductManagement';
+import Checkout from './components/Checkout';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <div className="App">
+       
+          {/* Route for the Login/Signup page */}
+          <Route path="/login">
+            <Auth />
+          </Route>
+
+          {/* Route for the Admin Panel (Product Management) */}
+          <Route path="/admin">
+            <ProductManagement />
+          </Route>
+
+          {/* Route for the Checkout page */}
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
+
+          {/* Default route (Home Page) */}
+          <Route path="/" exact>
+            <div style={{ padding: '20px' }}>
+              <h1>Welcome to the Inventory Management System</h1>
+              <p>Please login to continue.</p>
+            </div>
+          </Route>
+       
+      </div>
+    </Router>
   );
 }
 
